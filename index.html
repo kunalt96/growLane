@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growlane - Web Design, Apps, Ads & Marketing Agency</title>
+    <meta name="description"
+        content="Websites, apps, ads, and marketing — everything your business needs to win online. Built for growth, designed for trust.">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- 1. Header & Navigation -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="#" class="logo" id="logoLink">
+                <img src="assets/logo.svg" alt="Growlane Logo" id="logoImg">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <!-- Populated from database.json -->
+            </ul>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="hero overflow-hidden">
+        <div class="bg-ambient-blob" style="top: -10%; left: -10%;"></div>
+        <div class="container hero-grid">
+            <div class="hero-text reveal">
+                <div class="hero-badge animate-float" id="heroBadge">
+                    <span class="badge-dot animate-pulse"></span>
+                    <span class="text-label-caps" id="heroBadgeText"></span>
+                </div>
+                <h1 class="text-headline-xl text-on-background" id="heroHeadline"></h1>
+                <p class="text-body-lg text-on-surface-variant" id="heroSubheadline"></p>
+                <div class="flex gap-4 w-full pt-4" id="heroButtons"></div>
+            </div>
+            <div class="hero-image-wrapper reveal">
+                <!-- Ambient Glow behind illustration -->
+                <div class="bg-ambient-blob" style="top: 10%; right: -10%; width: 400px; height: 400px;"></div>
+                <!-- Clean UI Mockup Illustration -->
+                <div style="background-color: var(--color-surface); border-radius: var(--rounded-lg); border: 1px solid rgba(136, 115, 99, 0.15); box-shadow: var(--shadow-level-3); width: 100%; max-width: 480px; height: 380px; padding: 24px; display: flex; flex-direction: column; gap: 20px; position: relative; overflow: hidden;"
+                    class="animate-float">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(136, 115, 99, 0.1); padding-bottom: 12px;">
+                        <div style="display: flex; gap: 6px;">
+                            <span
+                                style="width: 10px; height: 10px; border-radius: 50%; background-color: #ff5f56; display: inline-block;"></span>
+                            <span
+                                style="width: 10px; height: 10px; border-radius: 50%; background-color: #ffbd2e; display: inline-block;"></span>
+                            <span
+                                style="width: 10px; height: 10px; border-radius: 50%; background-color: #27c93f; display: inline-block;"></span>
+                        </div>
+                        <span
+                            style="font-size: 11px; color: var(--color-text-light); background: var(--color-bg-secondary); padding: 4px 12px; border-radius: var(--rounded-full);">growlane.agency</span>
+                    </div>
+                    <div style="display: flex; gap: 16px; align-items: center;">
+                        <div
+                            style="width: 48px; height: 48px; border-radius: var(--rounded-default); background-color: var(--color-primary-container); display: flex; align-items: center; justify-content: center; color: white;">
+                            <span class="material-symbols-outlined">trending_up</span>
+                        </div>
+                        <div>
+                            <div
+                                style="height: 12px; width: 120px; background-color: var(--color-text-main); border-radius: 4px; margin-bottom: 6px;">
+                            </div>
+                            <div
+                                style="height: 8px; width: 80px; background-color: var(--color-text-light); border-radius: 4px; opacity: 0.5;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
+                        <div
+                            style="height: 8px; width: 100%; background-color: var(--color-bg-secondary); border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; width: 95%; background-color: var(--color-bg-secondary); border-radius: 4px;">
+                        </div>
+                        <div
+                            style="height: 8px; width: 70%; background-color: var(--color-bg-secondary); border-radius: 4px;">
+                        </div>
+                        <div
+                            style="display: flex; align-items: flex-end; gap: 12px; height: 100px; padding-top: 20px; margin-top: 10px; border-top: 1px dashed rgba(136, 115, 99, 0.1);">
+                            <div
+                                style="height: 30%; width: 100%; background-color: var(--color-surface-dim); border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="height: 55%; width: 100%; background-color: var(--color-surface-dim); border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="height: 40%; width: 100%; background-color: var(--color-surface-dim); border-radius: 4px 4px 0 0;">
+                            </div>
+                            <div
+                                style="height: 85%; width: 100%; background-color: var(--color-primary-container); border-radius: 4px 4px 0 0; position: relative;">
+                                <div
+                                    style="position: absolute; top: -25px; left: 50%; transform: translateX(-50%); background: var(--color-text-main); color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; white-space: nowrap;">
+                                    +145%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Services Section -->
+    <section id="services" class="py-24 relative">
+        <div class="container">
+            <div class="services-header reveal">
+                <span class="text-label-caps text-primary-container">What We Do</span>
+                <h2 class="text-headline-lg text-on-background">End-to-End Digital Growth</h2>
+            </div>
+            <div class="services-grid" id="servicesGrid">
+                <!-- Populated from database.json -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Process Section -->
+    <section class="py-24 bg-white border-y">
+        <div class="container">
+            <div class="services-header reveal">
+                <span class="text-label-caps text-primary-container">Our Process</span>
+                <h2 class="text-headline-lg text-on-background">Clear path to launch</h2>
+            </div>
+            <div class="relative">
+                <div class="faq-list" id="processGrid"
+                    style="max-width: 900px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; border: none;">
+                    <!-- Populated from database.json -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 5. Work / Portfolio Section -->
+    <!-- <section id="work" class="py-24" style="background-color: #1a1714; color: #ffffff;">
+        <div class="container">
+            <div class="reveal" style="margin-bottom: 60px;">
+                <span class="text-label-caps text-primary-container">Real Results</span>
+                <h2 class="text-headline-lg" style="color: #ffffff; max-width: 600px; margin-top: 8px;">We don't just
+                    build, we generate revenue.</h2>
+            </div>
+            <div class="work-grid" id="workGrid">
+                Populated from database.json -->
+    <!-- </div>
+    </div>
+    </section> -->
+
+
+    <!-- 6. About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="container">
+            <div class="contact-grid" style="align-items: center;">
+                <div class="contact-info reveal" id="aboutInfo">
+                    <!-- Populated from database.json -->
+                </div>
+                <div class="contact-form-container reveal"
+                    style="padding: 40px; background-color: var(--color-bg-primary);" id="aboutValues">
+                    <!-- Populated from database.json -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Testimonials Section -->
+    <section class="py-24 overflow-hidden" style="background-color: var(--color-bg-secondary); display:none">
+        <div class="container">
+            <div class="services-header reveal" style="margin-bottom: 40px;">
+                <span class="text-label-caps text-primary-container">Client Love</span>
+                <h2 class="text-headline-lg text-on-background">Don't just take our word for it</h2>
+            </div>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-track" id="testimonialTrack">
+                <!-- Populated from database.json -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Pricing Section -->
+    <section id="pricing" class="py-24 bg-white">
+        <div class="container">
+            <div class="services-header reveal">
+                <span class="text-label-caps text-primary-container">Transparent Pricing</span>
+                <h2 class="text-headline-lg text-on-background">Simple plans for serious growth</h2>
+            </div>
+            <div class="services-grid" style="align-items: stretch; max-width: 1080px; margin: 0 auto;"
+                id="pricingGrid">
+                <!-- Populated from database.json -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FAQ Section -->
+    <section class="py-24 bg-white border-t" style="display: none;">
+        <div class="container">
+            <div class="services-header reveal">
+                <span class="text-label-caps text-primary-container">FAQ</span>
+                <h2 class="text-headline-lg text-on-background">Common Questions</h2>
+            </div>
+            <div class="faq-list" id="faqList">
+                <!-- Populated from database.json -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info reveal" id="contactInfo">
+                    <!-- Populated from database.json -->
+                </div>
+                <div class="contact-form-container reveal">
+                    <div id="formAlert" class="form-alert"></div>
+                    <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+                        <input type="hidden" name="access_key" value="3ba5203e-e1a8-4985-bd5a-b67a05d45bf2">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-control" placeholder="you@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" rows="5" class="form-control"
+                                placeholder="Tell us about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary text-button w-full" style="padding: 16px;">Send
+                            Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. Footer -->
+    <footer class="footer" id="footer">
+        <!-- Populated from database.json -->
+    </footer>
+
+    <!-- Custom Interaction JS -->
+    <script src="main.js"></script>
+</body>
+
+</html>
