@@ -17,11 +17,6 @@
         "class": "nav-link"
       },
       {
-        "href": "#work",
-        "label": "Our Work",
-        "class": "nav-link"
-      },
-      {
         "href": "#about",
         "label": "About",
         "class": "nav-link"
@@ -306,10 +301,6 @@
           {
             "href": "#about",
             "label": "About Us"
-          },
-          {
-            "href": "#work",
-            "label": "Our Work"
           },
           {
             "href": "#pricing",
