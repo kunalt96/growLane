@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Growlane</title>
+    <meta name="description" content="Terms of Service for Growlane - Digital Marketing and Web Development Agency">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- Material Symbols Outlined -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .terms-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 2px solid rgba(136, 115, 99, 0.1);
+        }
+
+        .terms-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: var(--color-text-main);
+        }
+
+        .terms-header .company {
+            font-size: 1.5rem;
+            color: var(--color-primary-container);
+            margin-bottom: 8px;
+        }
+
+        .terms-header .last-updated {
+            font-size: 14px;
+            color: var(--color-text-light);
+            opacity: 0.7;
+        }
+
+        .terms-introduction {
+            background-color: var(--color-bg-secondary);
+            padding: 32px;
+            border-radius: var(--rounded-lg);
+            margin-bottom: 48px;
+            line-height: 1.8;
+            color: var(--color-text-muted);
+        }
+
+        .terms-section {
+            margin-bottom: 48px;
+        }
+
+        .terms-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 24px;
+            color: var(--color-text-main);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-primary-container);
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .terms-section p {
+            margin-bottom: 24px;
+            line-height: 1.8;
+            color: var(--color-text-muted);
+        }
+
+        .terms-section ul {
+            list-style: none;
+            margin-bottom: 24px;
+            padding-left: 0;
+        }
+
+        .terms-section li {
+            margin-bottom: 12px;
+            padding-left: 28px;
+            position: relative;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+
+        .terms-section li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary-container);
+            font-weight: 700;
+        }
+
+        .subsection {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-left: 24px;
+            border-left: 3px solid rgba(232, 133, 10, 0.3);
+        }
+
+        .subsection h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--color-text-main);
+        }
+
+        .terms-note {
+            background-color: rgba(232, 133, 10, 0.05);
+            padding: 20px;
+            border-radius: var(--rounded-default);
+            border-left: 4px solid var(--color-primary-container);
+            margin: 20px 0;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            line-height: 1.7;
+        }
+
+        .contact-box {
+            background-color: var(--color-bg-primary);
+            padding: 32px;
+            border-radius: var(--rounded-lg);
+            margin-top: 24px;
+        }
+
+        .contact-box p {
+            margin-bottom: 8px;
+        }
+
+        .contact-box strong {
+            color: var(--color-text-main);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 40px;
+            color: var(--color-primary-container);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            gap: 12px;
+        }
+
+        .divider {
+            text-align: center;
+            margin: 48px 0;
+            color: var(--color-text-light);
+            opacity: 0.4;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .terms-container {
+                padding: 40px 16px;
+            }
+
+            .terms-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .terms-section h2 {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.svg" alt="Growlane Logo" style="height: 40px;">
+            </a>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" style="display: none;">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="terms-container">
+            <a href="index.html" class="back-button">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back to Home
+            </a>
+
+            <div class="terms-header">
+                <div class="company">Growlane</div>
+                <h1>Terms of Service</h1>
+                <div class="last-updated" id="lastUpdated"></div>
+            </div>
+
+            <div class="terms-introduction" id="introduction"></div>
+
+            <div id="termsSections"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" style="margin-top: 80px; border-top: 1px solid rgba(136, 115, 99, 0.1);">
+        <div class="container" style="text-align: center; padding: 40px 20px;">
+            <p style="color: var(--color-text-light); font-size: 14px; margin-bottom: 12px;">
+                © 2026 Growlane Agency. All rights reserved.
+            </p>
+            <div style="display: flex; gap: 24px; justify-content: center; font-size: 14px;">
+                <a href="policy.html" style="color: inherit; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+                <a href="terms.html" style="color: inherit; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('terms.json')
+                .then(res => res.json())
+                .then(data => {
+                    const terms = data.terms_of_service;
+
+                    // Set last updated
+                    document.getElementById('lastUpdated').textContent = `Last Updated: ${terms.lastUpdated}`;
+
+                    // Set introduction
+                    const intro = terms.introduction.replace(/\n/g, '<br>');
+                    document.getElementById('introduction').innerHTML = intro;
+
+                    // Render sections
+                    const sectionsHtml = terms.sections.map(section => {
+                        let content = `
+                            <div class="terms-section">
+                                <h2>
+                                    <div class="section-number">${section.number}</div>
+                                    ${section.title}
+                                </h2>
+                        `;
+
+                        if (section.content) {
+                            content += `<p>${section.content.replace(/\n/g, '<br>')}</p>`;
+                        }
+
+                        if (section.subsections) {
+                            section.subsections.forEach(sub => {
+                                content += `<div class="subsection"><h4>${sub.heading}</h4>`;
+                                if (sub.content) {
+                                    content += `<p>${sub.content.replace(/\n/g, '<br>')}</p>`;
+                                }
+                                if (sub.points) {
+                                    content += `<ul>${sub.points.map(point => `<li>${point}</li>`).join('')}</ul>`;
+                                }
+                                if (sub.note) {
+                                    content += `<div class="terms-note">${sub.note}</div>`;
+                                }
+                                content += `</div>`;
+                            });
+                        }
+
+                        if (section.points && !section.subsections) {
+                            content += `<ul>${section.points.map(point => `<li>${point}</li>`).join('')}</ul>`;
+                        }
+
+                        if (section.note) {
+                            content += `<div class="terms-note">${section.note}</div>`;
+                        }
+
+                        if (section.contactInfo) {
+                            const info = section.contactInfo;
+                            content += `
+                                <div class="contact-box">
+                                    <p><strong>${info.company}</strong></p>
+                                    <p><strong>Email:</strong> ${info.email}</p>
+                                    <p><strong>Phone:</strong> ${info.phone}</p>
+                                    <p><strong>Website:</strong> ${info.website}</p>
+                                    <p><strong>Location:</strong> ${info.location}</p>
+                                </div>
+                            `;
+                        }
+
+                        content += `</div>`;
+
+                        if (section.number < terms.sections.length) {
+                            content += `<div class="divider">◆◆◆</div>`;
+                        }
+
+                        return content;
+                    }).join('');
+
+                    document.getElementById('termsSections').innerHTML = sectionsHtml;
+                })
+                .catch(err => console.error('Failed to load terms.json:', err));
+        });
+    </script>
+</body>
+
+</html>

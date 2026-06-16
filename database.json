@@ -43,11 +43,6 @@
         "label": "Start a Project",
         "class": "btn btn-primary text-button",
         "icon": "arrow_forward"
-      },
-      {
-        "href": "#work",
-        "label": "See Our Work",
-        "class": "btn btn-secondary text-button"
       }
     ]
   },
@@ -56,49 +51,40 @@
       "icon": "web",
       "title": "Website Design & Development",
       "description": "Your website is your best salesperson — it works 24/7, never calls in sick, and speaks to thousands at once. We build fast, beautiful, and conversion-focused websites that don't just look great but actually bring in business.",
-      "tags": [
-        "React",
-        "Webflow",
-        "Shopify"
-      ]
+      "tags": ["React", "Webflow", "Shopify"]
     },
     {
       "icon": "smartphone",
       "title": "Mobile App Development",
       "description": "Your customers are on their phones. We build sleek, intuitive apps for iOS and Android that keep your brand in their pocket — and your business top of mind. From idea to App Store, we handle it all.",
-      "tags": [
-        "iOS",
-        "Android",
-        "Flutter"
-      ],
+      "tags": ["iOS", "Android", "Flutter"],
       "variant": true
     },
     {
-      "icon": "trending_up",
-      "title": "SEO & Content",
-      "description": "When someone in your city searches for what you offer, you should be the first name they see. We make that happen — through smart keyword strategy, quality content, and local SEO that puts you on the map permanently.",
-      "tags": [
-        "Audit",
-        "Local SEO"
-      ]
+      "icon": "inventory_2",
+      "title": "Product Launch & Strategy",
+      "description": "Got a product idea but don't know where to start? We turn your vision into a launchable, sellable product — from naming and positioning to packaging and your first 100 customers. Whether it's a physical product, a digital service, or a mobile app, we map out the full go-to-market strategy so nothing is left to guesswork.",
+      "tags": ["Go-to-Market", "Launch Strategy", "Product Naming"]
+    },
+    {
+      "icon": "auto_awesome",
+      "title": "Brand Consultation",
+      "description": "You know you want to grow — but you're not sure where to begin. That's exactly where we come in. We sit down with you, understand your business, your goals, and your audience, then build a clear brand roadmap from scratch. Logo, colors, voice, story, online presence — we handle the thinking so you can focus on running your business.",
+      "tags": ["Brand Identity", "Strategy", "Consultation"],
+      "variant": true
     },
     {
       "icon": "campaign",
       "title": "Google & Meta Ads",
       "description": "Stop waiting for customers to find you — go find them first. We run laser-targeted ad campaigns on Google and Instagram that reach the right people at exactly the right moment, turning ad spend into real revenue.",
-      "tags": [
-        "PPC",
-        "Retargeting"
-      ]
+      "tags": ["PPC", "Retargeting"]
     },
     {
       "icon": "palette",
       "title": "Brand Management",
       "description": "People judge a business in seconds. A strong brand makes sure that first impression counts — and sticks. We craft logos, color systems, and visual identities that make your business look established, trustworthy, and impossible to forget.",
-      "tags": [
-        "UI/UX",
-        "Logo Design"
-      ]
+      "tags": ["UI/UX", "Logo Design"],
+      "variant": true
     }
   ],
   "process": [
@@ -316,11 +302,11 @@
     "copyright": "© 2026 Growlane Agency. All rights reserved.",
     "policies": [
       {
-        "href": "#",
+        "href": "policy.html",
         "label": "Privacy Policy"
       },
       {
-        "href": "#",
+        "href": "terms.html",
         "label": "Terms of Service"
       }
     ]

@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     /* ------------------------------------------------------------------
-       PHASE 1: Fetch database.json and render all sections
+       PHASE 1: Fetch database.jsonc and render all sections
     ------------------------------------------------------------------ */
     fetch('database.json')
         .then(res => res.json())
