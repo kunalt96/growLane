@@ -5,10 +5,10 @@
     "description": "Growlane is an AI-native product studio building intelligent software tools — from relationship intelligence to clinical management, developer tooling, and autonomous agents.",
     "email": "hello@thegrowlane.com",
     "github": "https://github.com/kunalt96",
-    "linkedin": "https://linkedin.com/company/growlane",
-    "twitter": "https://twitter.com/growlane",
-    "location": "Delhi, India",
-    "established": "2025"
+    "linkedin": "#",
+    "twitter": "#",
+    "location": "Gurgaon, India",
+    "established": "2026"
   },
 
   "nav": {
@@ -133,8 +133,8 @@
     ],
     "stats": [
       { "value": "7+",  "label": "Products in development" },
-      { "value": "2025","label": "Founded" },
-      { "value": "Delhi","label": "India" }
+      { "value": "2026","label": "Founded" },
+      { "value": "Gurgaon","label": "India" }
     ]
   },
 
