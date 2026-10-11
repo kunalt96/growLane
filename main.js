@@ -1,436 +1,303 @@
-/* ==========================================================================
-   Growlane Agency – Config-Based Rendering + Interactive JS Features
-   ========================================================================== */
+/* ═══════════════════════════════════════════
+   GROWLANE — main.js
+   Loads config.json and builds the entire page
+═══════════════════════════════════════════ */
 
-document.addEventListener('DOMContentLoaded', () => {
+async function loadConfig() {
+  const res = await fetch('./config.json');
+  return res.json();
+}
 
-    /* ------------------------------------------------------------------
-       PHASE 1: Fetch database.jsonc and render all sections
-    ------------------------------------------------------------------ */
-    fetch('database.json')
-        .then(res => res.json())
-        .then(data => {
-            renderNav(data.header);
-            renderHero(data.hero);
-            renderServices(data.services);
-            renderProcess(data.process);
-            renderWork(data.work);
-            renderAbout(data.about);
-            renderTestimonials(data.testimonials);
-            renderPricing(data.pricing);
-            renderFAQ(data.faq);
-            renderContact(data.contact);
-            renderFooter(data.footer);
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html) e.innerHTML = html;
+  return e;
+}
 
-            // After DOM is populated, attach interactive behaviours
-            initInteractions();
-        })
-        .catch(err => console.error('Failed to load database.json:', err));
+function buildNav(cfg) {
+  const nav = document.getElementById('navbar');
+  const inner = el('div', 'container');
+  const navInner = el('div', 'nav-inner');
 
-    /* ------------------------------------------------------------------
-       RENDERERS
-    ------------------------------------------------------------------ */
+  // Logo
+  const logo = el('a', 'nav-logo', `<span class="nav-logo-dot"></span>${cfg.brand.name}`);
+  logo.href = '#';
 
-    function renderNav(header) {
-        const logoText = document.getElementById('logoText');
-        const logoImg = document.getElementById('logoImg');
-        if (logoText) logoText.textContent = header.logo.text;
-        if (logoImg) { logoImg.src = header.logo.src; logoImg.alt = header.logo.alt; }
+  // Links
+  const links = el('nav', 'nav-links');
+  cfg.nav.links.forEach(l => {
+    const a = el('a', 'nav-link', l.label);
+    a.href = l.href;
+    links.appendChild(a);
+  });
 
-        const navMenu = document.getElementById('navMenu');
-        if (!navMenu) return;
-        navMenu.innerHTML = header.nav.map(item =>
-            `<li><a href="${item.href}" class="${item.class}">${item.label}</a></li>`
-        ).join('');
-    }
+  // CTA
+  const cta = el('a', 'btn btn--primary nav-cta', cfg.nav.cta.label);
+  cta.href = cfg.nav.cta.href;
 
-    function renderHero(hero) {
-        const badge = document.getElementById('heroBadgeText');
-        if (badge) badge.textContent = hero.badge;
+  // Hamburger
+  const ham = el('div', 'nav-hamburger', '<span></span><span></span><span></span>');
+  ham.setAttribute('aria-label', 'Menu');
 
-        const headline = document.getElementById('heroHeadline');
-        if (headline) headline.innerHTML = hero.headline;
+  navInner.appendChild(logo);
+  navInner.appendChild(links);
+  navInner.appendChild(cta);
+  navInner.appendChild(ham);
+  inner.appendChild(navInner);
+  nav.appendChild(inner);
 
-        const sub = document.getElementById('heroSubheadline');
-        if (sub) sub.textContent = hero.subtitle;
+  // Mobile menu
+  const mobileMenu = document.getElementById('mobile-menu');
+  cfg.nav.links.forEach(l => {
+    const a = el('a', '', l.label); a.href = l.href;
+    mobileMenu.appendChild(a);
+  });
+  const mCta = el('a', 'btn btn--primary', cfg.nav.cta.label);
+  mCta.href = cfg.nav.cta.href;
+  mobileMenu.appendChild(mCta);
 
-        const btns = document.getElementById('heroButtons');
-        if (btns) {
-            btns.innerHTML = hero.buttons.map(b => {
-                const iconHtml = b.icon
-                    ? ` <span class="material-symbols-outlined text-[20px] transition-transform">${b.icon}</span>`
-                    : '';
-                return `<a href="${b.href}" class="${b.class}">${b.label}${iconHtml}</a>`;
-            }).join('');
+  ham.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  mobileMenu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => mobileMenu.classList.remove('open'))
+  );
+
+  // Scroll shadow
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  });
+}
+
+function buildHero(cfg) {
+  const section = document.getElementById('hero');
+  const h = cfg.hero;
+  const f = cfg.featured;
+
+  section.innerHTML = `
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-content fade-up">
+          <span class="eyebrow">${h.eyebrow}</span>
+          <h1 class="hero-headline">${h.headline.replace('thinks', '<em>thinks</em>')}</h1>
+          <p class="hero-sub">${h.subtext}</p>
+          <div class="hero-actions">
+            <a href="${h.cta_primary.href}" class="btn btn--primary btn--lg">
+              ${h.cta_primary.label} <span class="arrow">→</span>
+            </a>
+            <a href="${h.cta_secondary.href}" class="btn btn--outline btn--lg">
+              ${h.cta_secondary.label}
+            </a>
+          </div>
+        </div>
+        <div class="hero-visual fade-up" style="transition-delay:.1s">
+          <div class="hero-card">
+            <div class="hero-card-tag">
+              <span class="tag tag--green">${f.tag}</span>
+            </div>
+            <div class="hero-card-title">${f.title}</div>
+            <div class="hero-card-desc">${f.description}</div>
+            <a href="${f.href}" class="btn btn--green" target="_blank" rel="noopener">
+              ${f.label} <span class="arrow">→</span>
+            </a>
+            <div class="hero-card-stat">
+              <div class="hero-stat-item">
+                <span class="hero-stat-val">7</span>
+                <span class="hero-stat-label">Products</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val">AI</span>
+                <span class="hero-stat-label">First</span>
+              </div>
+              <div class="hero-stat-item">
+                <span class="hero-stat-val">IN</span>
+                <span class="hero-stat-label">India-Built</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function buildProducts(cfg) {
+  const section = document.getElementById('products');
+  const statusClass = { green: 'tag--green', amber: 'tag--amber', gray: 'tag--gray' };
+
+  const cards = cfg.products.map(p => `
+    <div class="product-card">
+      <div class="product-card-top">
+        <span class="product-icon">${p.icon}</span>
+        <span class="tag ${statusClass[p.statusColor] || 'tag--gray'}">${p.status}</span>
+      </div>
+      <div class="product-name">${p.name}</div>
+      <div class="product-cat">${p.category}</div>
+      <div class="product-desc">${p.description}</div>
+      <div class="product-footer">
+        ${p.href !== '#'
+          ? `<a href="${p.href}" target="_blank" rel="noopener"
+               class="product-link product-link--live">Visit ${p.name} →</a>`
+          : `<span class="product-link">Learn more →</span>`
         }
-    }
+      </div>
+    </div>`).join('');
 
-    function renderServices(services) {
-        const grid = document.getElementById('servicesGrid');
-        if (!grid) return;
-        grid.innerHTML = services.map(s => {
-            const variantStyle = s.variant
-                ? ' style="grid-column: span 1; background-color: var(--color-surface-container-low); border: none;"'
-                : '';
-            const tags = s.tags.map(t => `<span class="tag">${t}</span>`).join('');
-            return `
-                <div class="service-card reveal"${variantStyle}>
-                    <div class="service-icon">
-                        <span class="material-symbols-outlined">${s.icon}</span>
-                    </div>
-                    <h3 class="text-headline-sm text-on-background">${s.title}</h3>
-                    <p class="text-body-md">${s.description}</p>
-                    <div class="work-tags">${tags}</div>
-                </div>`;
-        }).join('');
-    }
+  section.innerHTML = `
+    <div class="container">
+      <div class="products-header fade-up">
+        <span class="eyebrow">The Lab</span>
+        <h2 class="section-headline">Everything we're building.</h2>
+        <p class="section-sub">Seven products across AI, healthcare, developer tools, and agentic systems. All early stage. All intentional.</p>
+      </div>
+      <div class="products-grid fade-up" style="transition-delay:.1s">${cards}</div>
+    </div>`;
+}
 
-    function renderProcess(process) {
-        const grid = document.getElementById('processGrid');
-        if (!grid) return;
-        grid.innerHTML = process.map(p => `
-            <div class="reveal" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;">
-                <div style="width: 80px; height: 80px; border-radius: 50%; background-color: var(--color-bg-primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: var(--color-primary-container); border: 2px solid var(--color-surface-dim);">${p.step}</div>
-                <h3 class="text-headline-sm text-on-background">${p.title}</h3>
-                <p class="text-body-md">${p.description}</p>
-            </div>`).join('');
-    }
+function buildPillars(cfg) {
+  const section = document.getElementById('whatwedo');
+  const cards = cfg.pillars.map(p => `
+    <div class="pillar-card fade-up">
+      <div class="pillar-card-icon">${p.icon}</div>
+      <div class="pillar-card-title">${p.title}</div>
+      <div class="pillar-card-desc">${p.description}</div>
+    </div>`).join('');
 
-    function renderWork(work) {
-        const grid = document.getElementById('workGrid');
-        if (!grid) return;
-        grid.innerHTML = work.map(w => {
-            const wideStyle = w.wide ? ' grid-column: span 2;' : '';
-            const imgHeight = w.wide ? ' height: 380px;' : '';
-            return `
-                <div class="work-card reveal" style="background-color: #231a12; border-color: rgba(255,255,255,0.05);${wideStyle}">
-                    <div class="work-image" style="${imgHeight}">
-                        <img src="${w.image}" alt="${w.category}">
-                    </div>
-                    <div class="work-info">
-                        <span class="text-label-caps text-primary-container">${w.category}</span>
-                        <h3 class="text-headline-sm" style="color: #ffffff;">${w.title}</h3>
-                        <p class="text-body-md" style="color: rgba(255,255,255,0.7);">${w.description}</p>
-                        <a href="${w.link}" class="btn-tertiary" style="color: var(--color-primary-container);">Read Case Study <span class="material-symbols-outlined" style="vertical-align: middle; font-size: 16px;">arrow_forward</span></a>
-                    </div>
-                </div>`;
-        }).join('');
-    }
+  section.innerHTML = `
+    <div class="container">
+      <div class="pillars-header">
+        <div class="fade-up">
+          <span class="eyebrow">What We Do</span>
+          <h2 class="section-headline">Four focus areas.<br>One obsession.</h2>
+        </div>
+        <p class="section-sub fade-up" style="transition-delay:.08s">We build intelligent software across these domains — always with AI as the foundation, never as the afterthought.</p>
+      </div>
+      <div class="pillars-grid">${cards}</div>
+    </div>`;
+}
 
-    function renderAbout(about) {
-        const info = document.getElementById('aboutInfo');
-        if (info) {
-            info.innerHTML = `
-                <span class="text-label-caps text-primary-container">${about.label}</span>
-                <h2 class="text-headline-lg text-on-background">${about.heading}</h2>
-                <p class="text-body-lg">${about.description}</p>`;
-        }
+function buildAbout(cfg) {
+  const section = document.getElementById('about');
+  const a = cfg.about;
 
-        const values = document.getElementById('aboutValues');
-        if (values) {
-            values.innerHTML = `<div class="space-y-8">${about.values.map(v => `
-                <div class="flex gap-4">
-                    <div style="width: 56px; height: 56px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-level-1); flex-shrink: 0;">
-                        <span class="material-symbols-outlined text-primary-container">${v.icon}</span>
-                    </div>
-                    <div>
-                        <h4 class="text-headline-sm" style="font-size: 1.25rem;">${v.title}</h4>
-                        <p class="text-body-md">${v.description}</p>
-                    </div>
-                </div>`).join('')}</div>`;
-        }
-    }
+  const stats = a.stats.map(s => `
+    <div class="about-stat">
+      <div class="about-stat-val">${s.value}</div>
+      <div class="about-stat-label">${s.label}</div>
+    </div>`).join('');
 
-    function renderTestimonials(testimonials) {
-        const track = document.getElementById('testimonialTrack');
-        if (!track) return;
+  const paras = a.paragraphs.map(p => `<p>${p}</p>`).join('');
 
-        function cardHTML(t) {
-            const stars = Array(t.rating).fill('<span class="material-symbols-outlined">star</span>').join('');
-            return `
-                <div class="marquee-card">
-                    <div class="testimonial-rating">${stars}</div>
-                    <p class="text-body-md">${t.text}</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">${t.initials}</div>
-                        <div>
-                            <h4 class="text-button">${t.author}</h4>
-                            <p class="text-body-md" style="font-size: 13px;">${t.company}</p>
-                        </div>
-                    </div>
-                </div>`;
-        }
+  section.innerHTML = `
+    <div class="container">
+      <div class="about-inner">
+        <div class="fade-up">
+          <span class="eyebrow">About Growlane</span>
+          <h2 class="about-headline">${a.headline.replace('craft', '<em>craft</em>')}</h2>
+          <div class="about-text">${paras}</div>
+        </div>
+        <div class="about-stats fade-up" style="transition-delay:.1s">${stats}</div>
+      </div>
+    </div>`;
+}
 
-        // Original + duplicate for infinite marquee
-        const cards = testimonials.map(cardHTML).join('');
-        track.innerHTML = cards + cards;
-    }
+function buildContact(cfg) {
+  const section = document.getElementById('contact');
+  const c = cfg.contact;
 
-    function renderPricing(pricing) {
-        const grid = document.getElementById('pricingGrid');
-        if (!grid) return;
-        grid.innerHTML = pricing.map(p => {
-            const isHL = p.highlight;
-            const cardStyle = isHL
-                ? ' style="background-color: #1a1714; color: #ffffff; border-color: var(--color-primary-container); transform: translateY(-10px); box-shadow: var(--shadow-level-3);"'
-                : '';
-            const titleStyle = isHL ? ' style="color: #ffffff;"' : '';
-            const descStyle = isHL ? ' style="color: rgba(255,255,255,0.7);"' : '';
-            const priceLabelStyle = isHL ? ' style="opacity: 0.7; color: rgba(255,255,255,0.7);"' : ' style="opacity: 0.7;"';
-            const priceStyle = isHL ? ' style="color: #ffffff;"' : '';
-            const periodStyle = isHL ? ' style="color: rgba(255,255,255,0.7);"' : '';
-            const listStyle = isHL ? ' style="list-style: none; margin-bottom: 24px; flex-grow: 1; color: rgba(255,255,255,0.9);"' : ' style="list-style: none; margin-bottom: 24px; flex-grow: 1;"';
-            const suffix = p.priceSuffix ? `<span style="font-size: 1.5rem; font-weight: 400; opacity: 0.6;">${p.priceSuffix}</span>` : '';
-            const badge = p.badge
-                ? `<div style="position: absolute; top: 12px; right: 20px; background-color: var(--color-primary-container); color: white; padding: 4px 12px; border-radius: var(--rounded-full); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">${p.badge}</div>`
-                : '';
-            const features = p.features.map(f =>
-                `<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary-container" style="font-size: 18px;">check_circle</span> ${f}</li>`
-            ).join('');
+  section.innerHTML = `
+    <div class="container">
+      <div class="contact-inner">
+        <span class="eyebrow fade-up">Get Involved</span>
+        <h2 class="contact-headline fade-up">${c.headline}</h2>
+        <p class="contact-sub fade-up">${c.subtext}</p>
+        <div class="contact-form fade-up">
+          <input class="contact-input" id="contact-email" type="email"
+            placeholder="${c.placeholder}" autocomplete="off"/>
+          <button class="btn btn--primary" id="contact-submit">${c.buttonLabel}</button>
+        </div>
+        <div class="contact-hint fade-up">${c.hint}</div>
+        <div class="contact-confirm" id="contact-confirm">${c.confirmText}</div>
+      </div>
+    </div>`;
 
-            return `
-                <div class="service-card reveal"${cardStyle}>
-                    ${badge}
-                    <h3 class="text-headline-sm${isHL ? '' : ' text-on-background'}"${titleStyle}>${p.title}</h3>
-                    <p class="text-body-md"${descStyle}>${p.description}</p>
-                    <div style="margin: 20px 0;">
-                        <span class="text-label-caps"${priceLabelStyle}>${p.priceLabel}</span>
-                        <div class="text-headline-xl"${priceStyle}>${p.price}${suffix}</div>
-                        <span class="text-body-md"${periodStyle}>${p.period}</span>
-                    </div>
-                    <ul class="space-y-4"${listStyle}>${features}</ul>
-                    <a href="#contact" class="${p.buttonClass}">${p.buttonLabel}</a>
-                </div>`;
-        }).join('');
-    }
+  document.getElementById('contact-submit').addEventListener('click', () => {
+    const val = document.getElementById('contact-email').value.trim();
+    if (!val || !val.includes('@')) return;
+    document.querySelector('.contact-form').style.display = 'none';
+    document.querySelector('.contact-hint').style.display = 'none';
+    const confirm = document.getElementById('contact-confirm');
+    confirm.style.display = 'block';
+    // Reset after 5s
+    setTimeout(() => {
+      document.getElementById('contact-email').value = '';
+      document.querySelector('.contact-form').style.display = 'flex';
+      document.querySelector('.contact-hint').style.display = 'block';
+      confirm.style.display = 'none';
+    }, 5000);
+  });
 
-    function renderFAQ(faq) {
-        const list = document.getElementById('faqList');
-        if (!list) return;
-        list.innerHTML = faq.map(f => `
-            <div class="faq-item reveal">
-                <button class="faq-trigger">
-                    <span>${f.question}</span>
-                    <span class="material-symbols-outlined faq-icon">add</span>
-                </button>
-                <div class="faq-content">
-                    <div class="faq-content-inner">
-                        <p class="text-body-md">${f.answer}</p>
-                    </div>
-                </div>
-            </div>`).join('');
-    }
+  document.getElementById('contact-email').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('contact-submit').click();
+  });
+}
 
-    function renderContact(contact) {
-        const info = document.getElementById('contactInfo');
-        if (!info) return;
-        const features = contact.features.map(f =>
-            `<div class="flex items-center gap-2 text-body-md" style="margin-bottom: 8px;">
-                <span class="material-symbols-outlined text-success" style="font-size: 20px;">check_circle</span> ${f}
-            </div>`
-        ).join('');
-        info.innerHTML = `
-            <span class="text-label-caps text-primary-container">${contact.label}</span>
-            <h2 class="text-headline-lg text-on-background">${contact.heading}</h2>
-            <p class="text-body-lg">${contact.description}</p>
-            <div style="margin-top: 16px;">${features}</div>`;
-    }
+function buildFooter(cfg) {
+  const footer = document.getElementById('footer');
+  const b = cfg.brand;
+  const f = cfg.footer;
 
-    function renderFooter(footer) {
-        const el = document.getElementById('footer');
-        if (!el) return;
-        const cols = footer.columns.map(col => {
-            const links = col.links.map(l => `<li><a href="${l.href}">${l.label}</a></li>`).join('');
-            return `
-                <div class="footer-col">
-                    <h4>${col.title}</h4>
-                    <ul class="footer-links">${links}</ul>
-                </div>`;
-        }).join('');
+  const cols = f.columns.map(col => `
+    <div>
+      <div class="footer-col-heading">${col.heading}</div>
+      <div class="footer-col-links">
+        ${col.links.map(l => `<a href="${l.href}">${l.label}</a>`).join('')}
+      </div>
+    </div>`).join('');
 
-        const policies = footer.policies.map(p =>
-            `<a href="${p.href}" style="color: inherit; text-decoration: none; opacity: 0.6;">${p.label}</a>`
-        ).join('');
+  footer.innerHTML = `
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">
+            <span class="nav-logo-dot"></span>${b.name}
+          </div>
+          <div class="footer-brand-desc">${b.description}</div>
+        </div>
+        ${cols}
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">© ${b.established} ${b.name}. Made in ${b.location}.</div>
+        <div class="footer-socials">
+          <a class="footer-social" href="${b.github}" target="_blank" rel="noopener">GitHub</a>
+          <a class="footer-social" href="${b.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="footer-social" href="${b.twitter}" target="_blank" rel="noopener">Twitter</a>
+          <a class="footer-social" href="mailto:${b.email}">${b.email}</a>
+        </div>
+      </div>
+    </div>`;
+}
 
-        el.innerHTML = `
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-col">
-                        <a href="#" class="logo footer-logo">
-                            <img src="${footer.logo.src}" alt="${footer.logo.alt}">
-                            <span>${footer.logo.text}</span>
-                        </a>
-                        <p style="font-size: 14px; opacity: 0.7;">${footer.description}</p>
-                    </div>
-                    ${cols}
-                </div>
-                <div class="footer-bottom">
-                    <p>${footer.copyright}</p>
-                    <div style="display: flex; gap: 24px;">${policies}</div>
-                </div>
-            </div>`;
-    }
+function initScrollFadeIn() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+}
 
-    /* ------------------------------------------------------------------
-       PHASE 2: Interactive Behaviours (called after render)
-    ------------------------------------------------------------------ */
-    function initInteractions() {
+async function init() {
+  try {
+    const cfg = await loadConfig();
+    buildNav(cfg);
+    buildHero(cfg);
+    buildProducts(cfg);
+    buildPillars(cfg);
+    buildAbout(cfg);
+    buildContact(cfg);
+    buildFooter(cfg);
+    // Small delay so DOM is painted before observing
+    setTimeout(initScrollFadeIn, 50);
+  } catch (err) {
+    console.error('Growlane: failed to load config', err);
+  }
+}
 
-        // 1. Mobile Menu Toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.getElementById('navMenu');
-
-        if (mobileMenuBtn && navMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                const isActive = navMenu.classList.toggle('active');
-                mobileMenuBtn.querySelector('.material-symbols-outlined').textContent = isActive ? 'close' : 'menu';
-            });
-
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    mobileMenuBtn.querySelector('.material-symbols-outlined').textContent = 'menu';
-                });
-            });
-        }
-
-        // 2. Header Scroll Effect
-        const header = document.querySelector('.header');
-        if (header) {
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 40) {
-                    header.style.backgroundColor = 'rgba(255, 248, 245, 0.95)';
-                    header.style.boxShadow = 'var(--shadow-nav)';
-                    header.style.height = '70px';
-                } else {
-                    header.style.backgroundColor = 'rgba(255, 248, 245, 0.8)';
-                    header.style.boxShadow = 'none';
-                    header.style.height = '80px';
-                }
-            });
-        }
-
-        // 3. Scroll Reveal (Intersection Observer)
-        const revealElements = document.querySelectorAll('.reveal');
-        if ('IntersectionObserver' in window && revealElements.length > 0) {
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, {
-                threshold: 0.15,
-                rootMargin: '0px 0px -50px 0px'
-            });
-            revealElements.forEach(el => revealObserver.observe(el));
-        } else {
-            revealElements.forEach(el => el.classList.add('active'));
-        }
-
-        // 4. FAQ Accordion Toggle (single-open behavior)
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const trigger = item.querySelector('.faq-trigger');
-            const content = item.querySelector('.faq-content');
-            if (trigger && content) {
-                // Ensure content is collapsed initially
-                content.style.maxHeight = '0px';
-                trigger.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    // Collapse all items first
-                    faqItems.forEach(other => {
-                        other.classList.remove('active');
-                        const otherContent = other.querySelector('.faq-content');
-                        if (otherContent) otherContent.style.maxHeight = '0px';
-                    });
-                    // If it was not active, expand this one
-                    if (!isActive) {
-                        item.classList.add('active');
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                    }
-                });
-            }
-        });
-
-        // 5. Contact Form Validation and Submission (Mock)
-        const contactForm = document.getElementById('contactForm');
-        const formAlert = document.getElementById('formAlert');
-
-        if (contactForm && formAlert) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                const nameInput = document.getElementById('name');
-                const emailInput = document.getElementById('email');
-                const messageInput = document.getElementById('message');
-
-                let isValid = true;
-                let errorMessage = '';
-
-                formAlert.className = 'form-alert';
-                formAlert.style.display = 'none';
-
-                if (!nameInput.value.trim()) {
-                    isValid = false;
-                    errorMessage = 'Please enter your name.';
-                } else if (!emailInput.value.trim() || !validateEmail(emailInput.value)) {
-                    isValid = false;
-                    errorMessage = 'Please enter a valid email address.';
-                } else if (!messageInput.value.trim()) {
-                    isValid = false;
-                    errorMessage = 'Please enter your message.';
-                }
-
-                if (!isValid) {
-                    formAlert.textContent = errorMessage;
-                    formAlert.classList.add('error');
-                    formAlert.style.display = 'block';
-                    return;
-                }
-
-                const submitBtn = contactForm.querySelector('button[type="submit"]');
-                const originalBtnText = submitBtn.innerHTML;
-                const formData = new FormData(contactForm);
-
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Sending...';
-                submitBtn.style.opacity = '0.7';
-
-                try {
-                    const response = await fetch('https://api.web3forms.com/submit', {
-                        method: 'POST',
-                        body: formData
-                    });
-
-                    const data = await response.json();
-
-                    if (response.ok) {
-                        formAlert.textContent = 'Thank you! Your message has been sent successfully. We will get back to you shortly.';
-                        formAlert.classList.add('success');
-                        formAlert.style.display = 'block';
-                        contactForm.reset();
-                    } else {
-                        formAlert.textContent = data.message || 'Error: Unable to send your message.';
-                        formAlert.classList.add('error');
-                        formAlert.style.display = 'block';
-                    }
-                } catch (error) {
-                    formAlert.textContent = 'Something went wrong. Please try again.';
-                    formAlert.classList.add('error');
-                    formAlert.style.display = 'block';
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.style.opacity = '1';
-                }
-            });
-        }
-
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(String(email).toLowerCase());
-        }
-    }
-});
+document.addEventListener('DOMContentLoaded', init);

@@ -1,0 +1,184 @@
+{
+  "brand": {
+    "name": "Growlane",
+    "tagline": "AI products built for real people.",
+    "description": "Growlane is an AI-native product studio building intelligent software tools — from relationship intelligence to clinical management, developer tooling, and autonomous agents.",
+    "email": "hello@thegrowlane.com",
+    "github": "https://github.com/kunalt96",
+    "linkedin": "https://linkedin.com/company/growlane",
+    "twitter": "https://twitter.com/growlane",
+    "location": "Delhi, India",
+    "established": "2025"
+  },
+
+  "nav": {
+    "links": [
+      { "label": "Products",  "href": "#products" },
+      { "label": "What We Do","href": "#whatwedo" },
+      { "label": "About",     "href": "#about" },
+      { "label": "Contact",   "href": "#contact" }
+    ],
+    "cta": { "label": "Get Early Access", "href": "#contact" }
+  },
+
+  "hero": {
+    "eyebrow": "AI-native product studio",
+    "headline": "Software that thinks with you.",
+    "subtext": "We build intelligent tools — for clinics, developers, businesses, and people. Every product we ship starts with one question: does this make someone's life meaningfully better?",
+    "cta_primary":   { "label": "Explore Products", "href": "#products" },
+    "cta_secondary": { "label": "Our Story",        "href": "#about" }
+  },
+
+  "featured": {
+    "eyebrow": "Latest from the lab",
+    "title": "Pairity — Now in Early Access",
+    "description": "Our first live product. An AI-powered relationship compatibility engine that analyses personalities and communication styles to give couples deep, honest insight. Not astrology — real intelligence.",
+    "label": "Try Pairity",
+    "href": "https://pairity.app",
+    "tag": "Early Access"
+  },
+
+  "products": [
+    {
+      "id": "pairity",
+      "name": "Pairity",
+      "category": "AI · Relationships",
+      "description": "AI-powered compatibility analysis. Understands personalities, communication styles, and values to give couples honest insight into their connection.",
+      "status": "Early Access",
+      "statusColor": "green",
+      "href": "https://pairity.app",
+      "icon": "◈"
+    },
+    {
+      "id": "neurobrowse",
+      "name": "NeuroBrowse",
+      "category": "AI · Browser",
+      "description": "An AI-native desktop browser built on Electron. BYOK model support. Browses, researches, and acts — an agent that understands context, not just commands.",
+      "status": "In Development",
+      "statusColor": "amber",
+      "href": "#",
+      "icon": "⬡"
+    },
+    {
+      "id": "clinicos",
+      "name": "ClinicOS",
+      "category": "SaaS · Healthcare",
+      "description": "Modern clinic management for Indian doctors. Multi-tenant, offline-first, Electron-based. Appointments, records, billing, and prescriptions in one interface.",
+      "status": "In Development",
+      "statusColor": "amber",
+      "href": "#",
+      "icon": "◎"
+    },
+    {
+      "id": "vaultiq",
+      "name": "VaultIQ",
+      "category": "RAG · Knowledge",
+      "description": "Ask anything. Know everything. RAG pipeline over your entire company knowledge — Notion, Drive, Confluence, PDFs. Cited answers. Real-time updates.",
+      "status": "Coming Soon",
+      "statusColor": "gray",
+      "href": "#",
+      "icon": "◇"
+    },
+    {
+      "id": "replyiq",
+      "name": "ReplyIQ",
+      "category": "AI · Support",
+      "description": "AI customer support agent that actually resolves. Trains on your product, handles WhatsApp and email, resolves 70%+ tickets autonomously.",
+      "status": "Coming Soon",
+      "statusColor": "gray",
+      "href": "#",
+      "icon": "○"
+    },
+    {
+      "id": "fixora",
+      "name": "Fixora",
+      "category": "AI · Monitoring",
+      "description": "AI-powered error monitoring and diagnostics. Watches your production systems, captures errors in real-time, and diagnoses root causes with probable fixes — before users notice.",
+      "status": "Coming Soon",
+      "statusColor": "gray",
+      "href": "#",
+      "icon": "△"
+    }
+  ],
+
+  "pillars": [
+    {
+      "icon": "◈",
+      "title": "AI-Native Products",
+      "description": "We build software with AI as the foundation, not a bolt-on feature. Every product reasons, adapts, and improves with use."
+    },
+    {
+      "icon": "⬡",
+      "title": "SaaS & Healthcare",
+      "description": "Deep domain software for India's healthcare sector. Multi-tenant, offline-first, built for real constraints of clinics and hospitals."
+    },
+    {
+      "icon": "◎",
+      "title": "Developer Tooling",
+      "description": "npm libraries, browser extensions, and infrastructure tools that make developers faster. Built in the open, used by the community."
+    },
+    {
+      "icon": "⟡",
+      "title": "Agentic Systems",
+      "description": "Autonomous agents and orchestration pipelines that do real work — from customer support to knowledge retrieval to complex automation."
+    }
+  ],
+
+  "about": {
+    "headline": "Built by engineers. Obsessed with craft.",
+    "paragraphs": [
+      "Growlane is a small product studio based in Delhi, India. We are a team of engineers and designers who believe software should think with you, not at you.",
+      "Every tool we build starts with a real problem. We do not chase trends. We build things that would still matter in ten years.",
+      "We are AI-native from the ground up — every product uses intelligence as its core mechanism, not as an afterthought."
+    ],
+    "stats": [
+      { "value": "7+",  "label": "Products in development" },
+      { "value": "2025","label": "Founded" },
+      { "value": "Delhi","label": "India" }
+    ]
+  },
+
+  "contact": {
+    "headline": "Get early access.",
+    "subtext": "Join the waitlist for every Growlane product before public launch.",
+    "placeholder": "your@email.com",
+    "buttonLabel": "Join Waitlist",
+    "confirmText": "You're on the list. We'll be in touch.",
+    "hint": "No spam. Just product updates and early access."
+  },
+
+  "footer": {
+    "columns": [
+      {
+        "heading": "Products",
+        "links": [
+          { "label": "Pairity",    "href": "https://pairity.app" },
+          { "label": "NeuroBrowse","href": "#" },
+          { "label": "ClinicOS",   "href": "#" },
+          { "label": "HMS",        "href": "#" },
+          { "label": "VaultIQ",   "href": "#" },
+          { "label": "ReplyIQ",   "href": "#" },
+          { "label": "Fixora",    "href": "#" }
+        ]
+      },
+      {
+        "heading": "Company",
+        "links": [
+          { "label": "About",          "href": "#about" },
+          { "label": "What We Do",     "href": "#whatwedo" },
+          { "label": "GitHub",         "href": "https://github.com/kunalt96" },
+          { "label": "Privacy Policy", "href": "/privacy-policy.html" },
+          { "label": "Terms of Service","href": "/terms-of-service.html" }
+        ]
+      },
+      {
+        "heading": "Contact",
+        "links": [
+          { "label": "hello@thegrowlane.com","href": "mailto:hello@thegrowlane.com" },
+          { "label": "LinkedIn",             "href": "https://linkedin.com/company/growlane" },
+          { "label": "Twitter / X",          "href": "https://twitter.com/growlane" }
+        ]
+      }
+    ]
+  }
+}

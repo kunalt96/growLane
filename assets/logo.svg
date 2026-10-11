@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
-  <text x="10" y="42" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="32" fill="#1A1714">Growlane</text>
-  <path d="M165 40 L180 25 L172 25 M180 25 L180 33" stroke="#E8850A" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M160 45 Q175 45 185 30" stroke="#E8850A" stroke-width="2" fill="none" stroke-dasharray="4 2" />
-</svg>
